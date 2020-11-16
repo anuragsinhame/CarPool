@@ -1,3 +1,9 @@
+# Custom Git Ignores
+test
+
+
+
+
 # Logs
 logs
 *.log
