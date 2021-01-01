@@ -1,0 +1,33 @@
+<main class="container-fluid mt-5">
+  <form class="w-50 m-auto" #offerRide="ngForm" (ngSubmit)="onOfferRide(offerRide)">
+    <h1>Want to Offer a New Ride?</h1>
+    <div class="form-group row">
+      <label class="col-sm-3" for="from">From</label>
+      <select class="form-control col-sm-8" id="from" name="from" #selectedFrom="ngModel" ngModel
+        (change)="onFromSelected(selectedFrom.value);" required>
+        <option value="">---Select---</option>
+        <option *ngFor="let ride of validRides" [ngValue]="ride.from">{{ride.from}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label for="from" class="col-sm-3">To</label>
+      <select class="form-control col-sm-8" name="to" id="to" #selectedTo="ngModel" ngModel [(ngModel)]="destination"
+        required>
+        <!-- <option value="">---Select---</option> -->
+        <option *ngFor="let toCity of destinations" [ngValue]="toCity.place">{{toCity.place}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label for="from" class="col-sm-3">Seats</label>
+      <input type="number" name="seatsAvailable" id="seatsAvailable" [(ngModel)]="newRide.seatsLeft"
+      required max="5" min="1">
+    </div>
+    <button class="btn btn-success d-block m-auto" type="submit" [disabled]="!offerRide.form.valid">
+      Offer Ride</button>
+    <!-- </div> -->
+  </form>
+
+  {{ offerRide.form.value | json }}
+
+  <app-rides-cards *ngIf="myRides && myRides.length>0" [ridesArray]="myRides"></app-rides-cards>
+</main>

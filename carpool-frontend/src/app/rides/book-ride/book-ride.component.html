@@ -1,0 +1,28 @@
+<main class="container-fluid mt-5">
+  <form class="w-50 m-auto" #searchRide="ngForm" (ngSubmit)="getRides(searchRide)">
+    <div class="form-group row">
+      <label for="from" class="col-sm-2 col-xs-3">From:</label>
+      <select class="form-control col-sm-10 col-xs-8" id="from" name="from" #selectedFrom="ngModel" ngModel
+        (change)="onFromSelected(selectedFrom.value);" required>
+        <option value="">---Select---</option>
+        <option *ngFor="let ride of validRides" [ngValue]="ride.from">{{ride.from}}</option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label for="from" class="col-sm-2 col-xs-3">To:</label>
+
+      <select class="form-control col-sm-10 col-xs-8" name="to" id="to" #selectedTo="ngModel" ngModel
+        [(ngModel)]="destination" required>
+        <!-- <option value="">---Select---</option> -->
+        <option *ngFor="let toCity of destinations" [ngValue]="toCity.place">{{toCity.place}}</option>
+      </select>
+    </div>
+    <!-- <div class="text-align-center"> -->
+    <button class="btn btn-success d-block m-auto" type="submit" [disabled]="!searchRide.form.valid">Search
+      Rides</button>
+    <!-- </div> -->
+    {{searchRide.form.value | json}}
+  </form>
+
+  <app-rides-cards *ngIf="availableRides && availableRides.length>0" [ridesArray]="availableRides"></app-rides-cards>
+</main>
