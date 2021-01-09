@@ -16,3 +16,12 @@ html{
   background-color: #474747;
   color: #fff;
 }
+
+.input-error-msg{
+  color: red;
+}
+
+.auth-bg{
+  background: rgb(45, 46, 121);
+  color: white;
+}

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+
+import { Auth } from '../../models/auth.model';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  signUpData = new Auth();
+  signupSuccess = false;
+  confPassword: string | null;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  onSignUp(): void {
+    if(this.authService.registerUser(this.signUpData)){
+      this.signupSuccess = true;
+    }
   }
 
 }

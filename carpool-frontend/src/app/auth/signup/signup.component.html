@@ -1,1 +1,72 @@
-<p>signup works!</p>
+<main class="container-fluid mt-5">
+  <h1 class="text-center">Join Us!!</h1>
+  <div class="auth-bg w-75 m-auto p-5">
+    <form class="" #signUpForm="ngForm" (ngSubmit)="onSignUp()" appPwdValidators *ngIf="!signupSuccess">
+      <div class="form-group row">
+        <label class="col-sm-3" for="username">Username</label>
+        <input class="col-sm-8" type="text" id="username" name="username" #username="ngModel"
+          [(ngModel)]="signUpData.username" required pattern="^[A-z][A-z|0-9]+" minlength="4">
+        <div class="col input-error-msg" *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div *ngIf="username.errors.required">
+            Username is required
+          </div>
+          <div *ngIf="username.errors.minlength && !username.errors.pattern">
+            Username should be of atleast 4 characters
+          </div>
+          <div *ngIf="username.errors.pattern">
+            Username should start with an alphabet and should be of atleast 4 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3" for="emailId">Email</label>
+        <input class="col-sm-8" type="email" id="emailId" name="emailId" #emailId="ngModel"
+          [(ngModel)]="signUpData.emailId" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          [ngModelOptions]="{updateOn:'blur'}">
+        <div class="col input-error-msg" *ngIf="emailId.invalid && (emailId.dirty || emailId.touched)">
+          <div *ngIf="emailId.errors.required">
+            EmailId is required
+          </div>
+          <div *ngIf="emailId.errors.pattern">
+            Email id is not in correct format
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3" for="pwd">Password</label>
+        <input class="col-sm-8" type="password" id="pwd" name="pwd" #pwd="ngModel" [(ngModel)]="signUpData.password"
+          required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`~!@#$%^&*()_]).{8,}">
+        <div class="col input-error-msg" *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
+          <div *ngIf="pwd.errors.required">
+            Password is required
+          </div>
+          <div *ngIf="pwd.errors.pattern">
+            Password is not in acceptable format
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3" for="confPwd">Confirm Password</label>
+        <input class="col-sm-8" type="password" id="confPwd" name="confPwd" #confPwd="ngModel" [(ngModel)]="confPassword"
+          required>
+        <div class="col input-error-msg" *ngIf="(confPwd.dirty || confPwd.touched)">
+          <div *ngIf="confPwd.invalid && confPwd.errors.required">
+            Password is required
+          </div>
+          <div *ngIf="!confPwd.invalid && signUpForm.errors?.pwdNotSame">
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+      <!-- [ngModelOptions]="{updateOn:'blur'}" -->
+      <button class="btn btn-lg btn-warning d-block m-auto" type="submit"
+        [disabled]="!signUpForm.form.valid">Register</button>
+        {{ signUpForm.value | json }}
+        <br>Errors
+        {{ signUpForm.errors | json }}
+    </form>
+    <div *ngIf="signupSuccess">
+      SignUp successful. Redirecting to homepage.
+    </div>
+  </div>
+</main>

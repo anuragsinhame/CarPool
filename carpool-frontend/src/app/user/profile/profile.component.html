@@ -1,0 +1,89 @@
+<main class="container-fluid mt-5">
+  <div class="auth-bg w-75 m-auto p-5">
+    <h1 class="text-center">Your Profile</h1>
+    <form class="" [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+      <div class="image-picker row">
+        <div class="col-xs-6">
+          <!-- <img src="../../../assets/user.png" alt="user"> -->
+          <img class="w-50" [src]="imagePreview" alt="user">
+        </div>
+        <div class="col-xs-4 ml-2 my-auto">
+          <button class="btn btn-danger" type="button" (click)="imagePicker.click()">Choose Pic</button>
+          <input type="file" name="userImg" #imagePicker (change)="onImagePicked($event)">
+        </div>
+      </div>
+      <div class="form-group row" formGroupName="name">
+        <label class="col-lg-3" for="fname">First Name</label>
+        <input class="col-lg-3" type="text" name="fname" id="fname" formControlName="firstName" required>
+        <label class="col-lg-3" for="lname">Last Name</label>
+        <input class="col-lg-3" type="text" name="lname" id="lname" formControlName="lastName" required>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3" for="gender">Gender</label>
+        <div class="form-check form-check-inline col-lg-4">
+          <input type="radio" name="gender" id="male1" value="male" formControlName="gender">&nbsp;
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check form-check-inline col-lg-4">
+          <input type="radio" name="gender" id="female" value="female" formControlName="gender">&nbsp;
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3" for="mobile">Mobile Number</label>
+        <input type="tel" name="mobile" id="mobile" formControlName="mobile" required pattern="[0-9]{10}">
+      </div>
+      <div class="form-group" formGroupName="address">
+        <div class="form-group" formGroupName="permanent">
+          <header>
+            <h3>Permanent Address</h3>
+          </header>
+          <label for="address1">Address1</label>
+          <input class="form-control" type="text" name="address1" id="address1" formControlName="address1">
+          <!-- <label for="address2">Address2</label>
+          <input class="form-control" type="text" name="address2" id="address2" formControlName="address2">
+          <label for="city">City</label>
+          <input class="form-control" type="text" name="city" id="city" formControlName="city">
+          <label for="state">State</label>
+          <input class="form-control" type="text" name="state" id="state" formControlName="state"> -->
+          <label for="zip">Zip</label>
+          <input class="form-control" type="text" name="zip" id="zip" formControlName="zipCode">
+          <!-- <label for="country">Country</label>
+          <input class="form-control" type="text" name="country" id="country" formControlName="country"> -->
+        </div>
+        <div class="form-group">
+          <div class="form-check form-check-inline col-lg-4">
+            <input type="checkbox" name="addressSame" id="addressSame" formControlName="isCurrentSameToPermanent">&nbsp;
+            <label class="form-check-label" for="addressSame">Permanent and Current Address are same?</label>
+          </div>
+        </div>
+        <div class="form-group" formGroupName="current" *ngIf="!profileForm.value.address.isCurrentSameToPermanent">
+          <header>
+            <h3>Current Address</h3>
+          </header>
+          <label for="address1">Address1</label>
+          <input class="form-control" type="text" name="address1" id="address1" formControlName="address1">
+          <!-- <label for="address2">Address2</label>
+          <input class="form-control" type="text" name="address2" id="address2" formControlName="address2">
+          <label for="city">City</label>
+          <input class="form-control" type="text" name="city" id="city" formControlName="city">
+          <label for="state">State</label>
+          <input class="form-control" type="text" name="state" id="state" formControlName="state"> -->
+          <label for="zip">Zip</label>
+          <input class="form-control" type="text" name="zip" id="zip" formControlName="zipCode">
+          <!-- <label for="country">Country</label>
+          <input class="form-control" type="text" name="country" id="country" formControlName="country"> -->
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-success" type="submit">Save Profile</button>
+      </div>
+    </form>
+
+    {{profileForm.value | json}}
+    <br>dasd<br>
+    {{profileForm.value.address.isCurrentSameToPermanent}}
+
+
+  </div>
+</main>

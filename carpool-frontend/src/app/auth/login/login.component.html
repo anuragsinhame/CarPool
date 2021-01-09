@@ -1,1 +1,24 @@
-<p>login works!</p>
+<main class="container-fluid mt-5">
+  <h1 class="text-center">Login</h1>
+  <div class="auth-bg w-75 m-auto p-5">
+    <form class="" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" *ngIf="!loginSuccess">
+      <div class="form-group row">
+        <label class="col-sm-3" for="username">Username</label>
+        <input class="col-sm-8" type="text" id="username" name="username" #username="ngModel" ngModel required>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3" for="pwd">Password</label>
+        <input class="col-sm-8" type="password" id="pwd" name="pwd" #pwd="ngModel" ngModel required>
+      </div>
+      <!-- [ngModelOptions]="{updateOn:'blur'}" -->
+      <button class="btn btn-lg btn-warning d-block m-auto" type="submit"
+        [disabled]="!loginForm.form.valid">Login</button>
+        {{ loginForm.value | json }}
+        <br>Errors
+        {{ loginForm.errors | json }}
+    </form>
+    <div *ngIf="loginSuccess">
+      Login successful. Redirecting to homepage.
+    </div>
+  </div>
+</main>

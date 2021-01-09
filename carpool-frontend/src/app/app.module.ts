@@ -8,11 +8,13 @@ import { SingleCarouselComponent } from './single-carousel/single-carousel.compo
 import { FooterComponent } from './footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BookRideComponent } from './rides/book-ride/book-ride.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RidesCardsComponent } from './rides/rides-cards/rides-cards.component';
 import { OfferRideComponent } from './rides/offer-ride/offer-ride.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
+import { PwdValidatorsDirective } from './utilities/validators/pwd-validators.directive';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,15 @@ import { LoginComponent } from './auth/login/login.component';
     RidesCardsComponent,
     OfferRideComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    PwdValidatorsDirective,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     // {provide: APP_INITIALIZER, useFactory: appInitialize, deps: [InitializerService], multi: true}
